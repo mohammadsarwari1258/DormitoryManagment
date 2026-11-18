@@ -1,0 +1,4 @@
+Migration report
+================
+Student NOT copied ([SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: students.NIC)): Kalid Khaber, NIC 12345, room 1
+Student NOT copied ([SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: students.NIC)): jkhg ngvyu, NIC 12345, room 9

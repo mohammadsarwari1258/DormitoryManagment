@@ -1,0 +1,98 @@
+=== 1. Service/logic test (fresh database)
+PASS  15 rooms on first start
+PASS  still 15 rooms after second start
+PASS  default admin can log in
+PASS  admin password is hashed
+PASS  room 11 full -> Unavailable
+PASS  4th student in a 3-bed room -> "Room 11 is full (capacity 3)."
+PASS  duplicate NIC -> "A student with this NIC already exists."
+PASS  missing first name -> "First name is required."
+PASS  unknown room -> "Room 99 does not exist."
+PASS  bad date -> "Date of entry must look like 2025-03-21 (yyyy-MM-dd)."
+PASS  transfer frees room 11
+PASS  transfer to a full room -> "Room 12 is full (capacity 3)."
+PASS  transfer to the same room -> "The student is already in room 1."
+PASS  occupants of room 1 = 1
+PASS  duplicate payment for same student+period -> "A payment record for this student and period already exists. Edit it instead."
+PASS  negative amount -> "Amount due must be greater than zero."
+PASS  zero amount -> "Amount due must be greater than zero."
+PASS  paying more than due -> "The paid amount cannot be larger than the amount due."
+PASS  bad period -> "Period is not a valid year and month."
+PASS  paid amount without a date -> "Payment date is required (format yyyy-MM-dd)."
+PASS  statuses Paid/Partial/Unpaid
+PASS  student b debt = 700
+PASS  default due of student a = room 1 rent (1500)
+PASS  delete student with payments -> "This student has payment records, so he cannot be deleted. Use Exit instead; the financial history is kept."
+PASS  exit frees the bed
+PASS  payment history kept after exit
+PASS  exit twice -> "This student has already left the dormitory."
+PASS  dues generated only for active students
+PASS  generating twice creates nothing
+PASS  partial -> paid after editing
+PASS  duplicate employee phone -> "An employee with this phone number already exists."
+PASS  duplicate salary period -> "The salary for this employee and period was already recorded."
+PASS  salary for unknown employee -> "No employee with this ID exists."
+PASS  salary totals paid 14000 / unpaid 6000
+PASS  delete employee with salary history -> "This employee has salary records, so he cannot be deleted. Deactivate him instead."
+PASS  salary for inactive employee -> "This employee is inactive."
+PASS  duplicate cost -> "This exact cost was already recorded."
+PASS  negative cost -> "Price must be greater than zero."
+PASS  cost total 3500
+PASS  cost report for January = 3000
+PASS  duplicate username -> "This username already exists."
+PASS  short password -> "Password must have at least 4 characters."
+PASS  new user can log in
+PASS  demote the only admin -> "There must always be at least one active Admin."
+PASS  inactive user cannot log in
+PASS  dashboard students = db
+PASS  dashboard capacity 61 (4*4 + 6*5 + 5*3)
+PASS  dashboard occupancy % from real data
+PASS  income = money received
+PASS  unpaid is not income
+PASS  net = income - costs - salary
+PASS  recent activities exist
+PASS  months chart has data
+PASS  foreign key blocks unknown room
+PASS  no room over capacity
+
+RESULT: 55 passed, 0 failed
+
+=== 2. Migration test (your original database)
+PASS  room count is 15
+PASS  4 rooms of 4 / 6 rooms of 5 / 5 rooms of 3
+PASS  rents 1200/1500/1800
+INFO  old students: 6, copied: 4 (the rest are in migration_report.txt)
+PASS  no room is over capacity
+PASS  room status matches occupancy
+PASS  old users kept
+PASS  no plain-text passwords
+PASS  old password still logs in
+PASS  wrong password refused
+PASS  second start creates nothing twice
+PASS  foreign keys are ON
+
+RESULT: 11 passed, 0 failed
+
+=== 3. Screens test (headless, real SQLite data)
+PASS  dashboard created
+PASS  student table filled (7 rows)
+PASS  room table has 15 rows
+PASS  payment table filled
+PASS  employee table 1 row
+PASS  salary table 1 row
+PASS  cost table 2 rows
+PASS  user table 1 row
+PASS  screen opens: AddEmployee
+PASS  screen opens: AddSalary
+PASS  screen opens: AddCost
+PASS  screen opens: AddUser
+PASS  screen opens: FormAdd
+PASS  screen opens: Sitting
+PASS  edit employee opens
+PASS  login form opens
+PASS  search finds 1 student
+PASS  dashboard reloads itself after a student is added
+PASS  dashboard reloads itself after a cost is added
+PASS  dashboard stops listening when it is not shown
+
+RESULT: 20 passed, 0 failed
